@@ -29,17 +29,18 @@ def _load_video(video_filename):
         ret, frame = capture.read()
         if not ret:
             break
-
         vid_frames[x] = frame
         x += 1
+    
     capture.release()
-
     return vid_frames, fps
 
 
 def load_video_float(video_filename):
     vid_data, fps = _load_video(video_filename)
-    return uint8_to_float(vid_data), fps
+    vid_dtf = uint8_to_float(vid_data)
+    #print(vid_dt)
+    return vid_dtf, fps
 
 
 def get_capture_dimensions(capture):

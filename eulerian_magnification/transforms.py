@@ -4,7 +4,8 @@ import scipy
 
 def uint8_to_float(img):
     result = np.ndarray(shape=img.shape, dtype='float')
-    result[:] = img * (1. / 255)
+    #print("")
+    result = img * 1. / 255
     return result
 
 

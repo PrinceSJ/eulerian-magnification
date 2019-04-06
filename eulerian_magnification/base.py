@@ -11,6 +11,7 @@ from eulerian_magnification.transforms import temporal_bandpass_filter
 
 def eulerian_magnification(vid_data, fps, freq_min, freq_max, amplification, pyramid_levels=4, skip_levels_at_top=2):
     vid_pyramid = create_laplacian_video_pyramid(vid_data, pyramid_levels=pyramid_levels)
+    print("2")
     for i, vid in enumerate(vid_pyramid):
         if i < skip_levels_at_top or i >= len(vid_pyramid) - 1:
             # ignore the top and bottom of the pyramid. One end has too much noise and the other end is the
@@ -23,7 +24,7 @@ def eulerian_magnification(vid_data, fps, freq_min, freq_max, amplification, pyr
 
         vid_pyramid[i] += bandpassed
         # play_vid_data(vid_pyramid[i])
-
+        
     vid_data = collapse_laplacian_video_pyramid(vid_pyramid)
     return vid_data
 
