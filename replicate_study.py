@@ -19,11 +19,11 @@ from eulerian_magnification.io import save_video, load_video_float
 PAPER_REPLICATION_VALUES = [
     # name, amplification_factor, cutoff, lower_hertz, upper_hertz, framerate
     #('baby', 10, 16, 0.4, 3, 30),
-    ('baby', 10, 16, 0.4, 0.8, 30),
-    #('baby2', 150, 600, 2.33, 2.67, 30),
+    #('baby', 10, 16, 0.4, 0.8, 30),
+    ('baby2', 150, 600, 2.33, 2.67, 30),
     #('camera', 120, 20, 45, 100, 300),
     #('face', 100, 1000, 0.83, 1, 30),
-   # ('guitar', 120, 40, 72, 92, 600),  # low E
+    #('guitar', 120, 40, 72, 92, 600),  # low E
     # ('shadow', 5, 48, 0.5, 10, 30),
     # ('subway', 60, 90, 3.6, 6.2, 30),
     # ('wrist', 10, 80, 0.4, 3, 30),
@@ -66,7 +66,7 @@ def replicate_study():
 
         source_path = os.path.join(SOURCE_VIDEOS_DIR, source_filename)
         vid, fps = load_video_float(source_path) #to do!
-        #print("cap done")
+        #print("vid type: "+str(vid.shape))
         vid = em.eulerian_magnification(
             vid, fps,
             freq_min=lower_hertz,
@@ -74,7 +74,7 @@ def replicate_study():
             amplification=amplification_factor,
             pyramid_levels=pyramid_levels
         )
-        print("end")
+        print("end.")# Vid type: "+str())
         file_name = os.path.splitext(source_path)[0]
         file_name = file_name + "__" + image_processing + "_levels" + str(pyramid_levels) + "_min" + str(
             lower_hertz) + "_max" + str(upper_hertz) + "_amp" + str(amplification_factor)

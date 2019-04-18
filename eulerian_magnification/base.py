@@ -4,28 +4,30 @@ import scipy.fftpack
 import scipy.signal
 from matplotlib import pyplot
 
-# from eulerian_magnification.io import play_vid_data
-from eulerian_magnification.pyramid import create_laplacian_video_pyramid, collapse_laplacian_video_pyramid
+#from eulerian_magnification.io import play_vid_data
+from eulerian_magnification.pyramid import create_laplacian_video_pyramid, collapse_laplacian_video_pyramid 
 from eulerian_magnification.transforms import temporal_bandpass_filter
 
 
 def eulerian_magnification(vid_data, fps, freq_min, freq_max, amplification, pyramid_levels=4, skip_levels_at_top=2):
     vid_pyramid = create_laplacian_video_pyramid(vid_data, pyramid_levels=pyramid_levels)
-    print("2")
+    print("vid_pyramid shape: "+str(len(vid_pyramid)))
     for i, vid in enumerate(vid_pyramid):
+        print("i = "+str(i))
         if i < skip_levels_at_top or i >= len(vid_pyramid) - 1:
             # ignore the top and bottom of the pyramid. One end has too much noise and the other end is the
             # gaussian representation
             continue
-
+        #print("iiiiiiiii = "+str(i))
         bandpassed = temporal_bandpass_filter(vid, fps, freq_min=freq_min, freq_max=freq_max, amplification_factor=amplification)
 
-        # play_vid_data(bandpassed)
+        #play_vid_data(bandpassed)
 
         vid_pyramid[i] += bandpassed
         # play_vid_data(vid_pyramid[i])
-        
+
     vid_data = collapse_laplacian_video_pyramid(vid_pyramid)
+    #print("vid_data300: "+str(vid_data[300].shape))
     return vid_data
 
 

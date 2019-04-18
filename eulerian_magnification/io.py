@@ -76,8 +76,9 @@ def save_video(video, fps, save_filename='media/output.avi'):
     """Save a video to disk"""
     # fourcc = cv2.CAP_PROP_FOURCC('M', 'J', 'P', 'G')
     print(save_filename)
-    video = float_to_uint8(video)
+    video = float_to_uint8(numpy.asarray(video))
     fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+    print("Video shape: "+str(video.shape))
     writer = cv2.VideoWriter(save_filename, fourcc, fps, (video.shape[2], video.shape[1]), 1)
     for x in range(0, video.shape[0]):
         res = cv2.convertScaleAbs(video[x])
