@@ -19,8 +19,8 @@ from eulerian_magnification.io import save_video, load_video_float
 PAPER_REPLICATION_VALUES = [
     # name, amplification_factor, cutoff, lower_hertz, upper_hertz, framerate
     #('baby', 10, 16, 0.4, 3, 30),
-    #('baby', 10, 16, 0.4, 0.8, 30),
-    ('baby2', 150, 600, 2.33, 2.67, 30),
+    ('baby', 10, 16, 0.4, 0.8, 30),
+    #('baby2', 150, 600, 2.33, 2.67, 30),
     #('camera', 120, 20, 45, 100, 300),
     #('face', 100, 1000, 0.83, 1, 30),
     #('guitar', 120, 40, 72, 92, 600),  # low E
@@ -60,7 +60,7 @@ SOURCE_VIDEOS_DIR = 'eulerian_source_videos'
 def replicate_study():
     # download_videos()
     image_processing = 'laplacian'
-    pyramid_levels = 2
+    pyramid_levels = 5
     for name, amplification_factor, cutoff, lower_hertz, upper_hertz, framerate in PAPER_REPLICATION_VALUES:
         source_filename = name + '.mp4'
 
